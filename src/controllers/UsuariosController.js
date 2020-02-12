@@ -1,8 +1,15 @@
-const { connect } = require('../models/Repository')
-const usuariosModel = require('../models/UsuariosSchema')
-const bcrypt = require('bcryptjs')
-
+const { connect } = require('../models/Repository');
+const usuariosModel = require('../models/UsuariosSchema');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../config/auth');
 connect()
+
+function generateToken(params = {}) {
+  return jwt.sign(params, authConfig.secret, {
+    expiresIn: 86400
+  });
+} 
 
 const getAll = (request, response) => {
   usuariosModel.find((error, usuario) => {
@@ -46,13 +53,18 @@ const add = async (request, response) => {
     request.body.senha = senhaCriptografada
     const novoUsuario = new usuariosModel(request.body)
   
-    novoUsuario.save((error) => {
+    await novoUsuario.save((error) => {
       if (error) {
         return response.status(500).send(error)
       }
       
       novoUsuario.senha = undefined;
-      return response.status(201).send(novoUsuario)
+
+      return response.status(201)
+      .send({
+        novoUsuario, 
+        token: generateToken({ id: novoUsuario.id })
+      });
     })
 
   } catch (error) {
@@ -64,16 +76,27 @@ const add = async (request, response) => {
 }
 
 const login = async (request, response) => {
-  const cpf = request.body.cpf
-  const senha = request.body.senha
-  const usuario = await usuariosModel.findOne({ cpf })
-  const senhaValida = bcrypt.compareSync(senha, usuario.senha)
+  const cpf = request.body.cpf;
+  const senha = request.body.senha;
+  const usuario = await usuariosModel.findOne({ cpf }).select('+senha');
 
-  if (senhaValida) {
-    return response.status(200).send('Usuário logado!')
+  if(!usuario)
+    return response.status(400).send({ error: 'Usuário não encontrado' });
+
+  const senhaValida = bcrypt.compareSync(senha, usuario.senha)
+  if (!senhaValida) {
+    return response.status(401).send('Usuário ou senha inválidos!');
   }
 
-  return response.status(401).send('Usuário ou senha inválidos!')
+  usuario.senha = undefined;
+
+  return response.status(200)
+    .send({
+      usuario, 
+      token: generateToken({ id: usuario.id })
+    });
+
+
 }
 
 const remove = (request, response) => {
