@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MONGO_URL = 'mongodb://localhost:27017/bancoava2';
+const MONGO_URL = 'mongodb+srv://admin:admin@cluster0-3tdqy.mongodb.net/test?retryWrites=true&w=majority';
 
 function connect () {
   mongoose.connect(MONGO_URL,
@@ -15,3 +15,5 @@ function connect () {
 }
 
 module.exports = { connect }
+
+

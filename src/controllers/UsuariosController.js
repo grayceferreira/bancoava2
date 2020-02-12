@@ -30,21 +30,37 @@ const getById = (request, response) => {
   })
 }
 
-const add = (request, response) => {
+const add = async (request, response) => {
   if (!request.body.senha) {
     return response.status(400).send('Informe sua senha!')
   }
-  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  request.body.senha = senhaCriptografada
-  const novoUsuario = new usuariosModel(request.body)
 
-  novoUsuario.save((error) => {
-    if (error) {
-      return response.status(500).send(error)
+  try {
+    const cpf = request.body.cpf
+
+    if(await usuariosModel.findOne({ cpf })){
+      return response.status(400).send('Usuário já existe!')
     }
 
-    return response.status(201).send(novoUsuario)
-  })
+    const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+    request.body.senha = senhaCriptografada
+    const novoUsuario = new usuariosModel(request.body)
+  
+    novoUsuario.save((error) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+      
+      novoUsuario.senha = undefined;
+      return response.status(201).send(novoUsuario)
+    })
+
+  } catch (error) {
+    return response.status(400).send('Erro ao tentar cadastrar!')
+
+  }
+
+
 }
 
 const login = async (request, response) => {
