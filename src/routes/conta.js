@@ -3,8 +3,9 @@ const router = express.Router();
 const controller = require("../controllers/ContasController");
 
 
-router.post('/:usuarioId/novaConta', controller.newAccount)
+router.post('/novaConta/:usuarioId', controller.newAccount)
 router.get('', controller.getAll)
-router.get('/:id', controller.getById)
+/* router.get('/:id', controller.getContaById) vale a pena manter? */
+router.get('/:usuarioId', controller.getContasUsuario)
 
 module.exports = router

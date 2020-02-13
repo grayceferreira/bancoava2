@@ -44,8 +44,8 @@ connect()
         })
     }
 
-    const getById = (request, response) => {
-        const id = request.params.id
+    const getContaById = (request, response) => {
+        const id = request.params.usuario
         
         return contasModel.findById(id, (error, conta) => {
             if (error){
@@ -60,8 +60,25 @@ connect()
         })
     } 
 
+    getContasUsuario = (request, response) => {
+      const usuarioId = request.params.usuario
+
+      return contasModel.findById(usuarioId, (error, conta) => {
+        if (error){
+          return response.status(500).send(error)
+        }
+
+        if (conta) {
+          return response.status(200).send(conta)
+        }
+
+        return response.status(400).send('Esse usuário não possui conta(s).')
+      })
+    }
+
     module.exports = {
         newAccount,
         getAll,
-        getById
+        getContaById,
+        getContasUsuario
     }
