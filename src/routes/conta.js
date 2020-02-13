@@ -5,7 +5,7 @@ const controller = require("../controllers/ContasController");
 
 router.post('/novaConta/:usuarioId', controller.newAccount)
 router.get('', controller.getAll)
-/* router.get('/:id', controller.getContaById) vale a pena manter? */
+router.get('/detalhes/:id', controller.getContaById) 
 router.get('/:usuarioId', controller.getContasUsuario)
 
 module.exports = router
