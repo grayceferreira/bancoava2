@@ -8,7 +8,6 @@ connect()
     const {
         tipo, agencia, conta, saldo,
       } = request.body;
-      console.log(request.body)
 
       novaConta = new contasModel({
           tipo,
@@ -18,7 +17,6 @@ connect()
           usuario: request.params.usuarioId,
       });
 
-      console.log(novaConta)
 
       novaConta.save()
       .then(() => {
@@ -61,9 +59,9 @@ connect()
     } 
 
     const getContasUsuario = (request, response) => {
-      const usuarioId = request.params.usuario
+      const usuario = request.params.usuario
       
-      return contasModel.findById(usuarioId, (error, conta) => {
+      return contasModel.find(usuario, (error, conta) => {
         if (error){
           return response.status(500).send(error)
       }

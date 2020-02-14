@@ -10,14 +10,12 @@ const newTransferExterna = (request, response, next) => {
         idBanco, tipoConta, agencia, conta, documento, tipoTransferencia, valor,
         data, finalidade, historico
       } = request.body;
-      console.log(request.body)
 
       novaTransferencia = new transferenciasModel({
         idBanco, tipoConta, agencia, conta, documento, tipoTransferencia, valor,
         data, finalidade, historico, contaOrigem: request.params.contaId,
       });
 
-      console.log(novaTransferencia)
 
       novaTransferencia.save()
       .then(() => {
@@ -38,15 +36,12 @@ const newTransferExterna = (request, response, next) => {
             tipoTransferencia, valor,
             data, finalidade, historico
           } = request.body;
-          console.log(request.body)
     
           novaTransferencia = new transferenciasModel({
             tipoTransferencia, valor,
             data, finalidade, historico, contaAva: request.params.contaDestino,
             contaOrigem: request.params.contaId,
           });
-    
-          console.log(novaTransferencia)
     
           novaTransferencia.save()
           .then(() => {

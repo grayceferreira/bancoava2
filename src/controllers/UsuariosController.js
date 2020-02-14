@@ -12,6 +12,7 @@ function generateToken(params = {}) {
 } 
 
 const getAll = (request, response) => {
+  
   usuariosModel.find((error, usuario) => {
     if (error) {
       return response.status(500).send(error)
@@ -22,7 +23,7 @@ const getAll = (request, response) => {
 }
 
 const getById = (request, response) => {
-  const id = request.params.id
+  const id = request.userId;
 
   return usuariosModel.findById(id, (error, usuario) => {
     if (error) {
