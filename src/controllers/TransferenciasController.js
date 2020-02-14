@@ -58,12 +58,6 @@ const newTransferExterna = (request, response, next) => {
           .catch(err => next(err));
         }
 
-<<<<<<< Updated upstream
-        
-    module.exports = {
-        newTransferExterna,
-        newTransferInterna
-=======
         const getById = (request, response) => {
           const id = request.params.id
           
@@ -101,5 +95,4 @@ const newTransferExterna = (request, response, next) => {
         newTransferInterna,
         getTransferenciasConta,
         getById
->>>>>>> Stashed changes
     }
