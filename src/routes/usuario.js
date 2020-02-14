@@ -8,7 +8,7 @@ const router = express.Router();
 const controller = require("../controllers/UsuariosController")
 
 router.post('/login', controller.login)
-router.use(authMiddware);
+/* router.use(authMiddware); */
 router.post('', controller.add)
 router.get('', controller.getAll)
 router.get('/:id', controller.getById)
