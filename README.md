@@ -81,6 +81,12 @@ As rotas apresentadas na aplicação são:
 
 - GET `/extrato/:contaOrigemId` - visualizar o extrato de uma conta através de seu id
 
+### API online
+
+Nós fizemos questão de disponibilizar nossa API online através do Heroku! Corre lá pra conferir :)
+
+(<https://bancoava.herokuapp.com/>)
+
 
 
 ### Contribuindo com o projeto
