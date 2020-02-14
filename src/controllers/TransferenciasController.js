@@ -59,40 +59,40 @@ const newTransferExterna = (request, response, next) => {
         }
 
         const getById = (request, response) => {
-          const id = request.id;
-        
-          return transferenciasModel.findById(id, (error, transferencia) => {
-            if (error) {
-              return response.status(500).send(error)
-            }
-        
-            if (transferencia) {
-              return response.status(200).send(transferencia)
-            }
-        
-            return response.status(404).send('Transação não encontrada.')
-          })
-        }
-        
-        const getTransferenciasUsuario = (request, response) => {
-          const usuario = request.params.usuario
+          const id = request.params.id
           
-          return transferenciasModel.find(usuario, (error, transferencia) => {
+          return transferenciasModel.find(id, (error, transferencia) => {
+              if (error){
+                  return response.status(500).send(error)
+              }
+  
+              if (transferencia) {
+                  return response.status(200).send(transferencia)
+              }
+  
+              return response.status(400).send('Transação não encontrada.')
+          })
+      } 
+        
+        const getTransferenciasConta = (request, response) => {
+          const contaOrigem = request.params.contaOrigem
+          
+          return transferenciasModel.find(contaOrigem, (error, transferencia) => {
             if (error){
               return response.status(500).send(error)
           }
     
-          if (conta) {
+          if (transferencia) {
               return response.status(200).send(transferencia)
           }
     
-          return response.status(400).send('Não há transferências realizadas por este usuário.')
+          return response.status(400).send('Não há transferências realizadas por essa conta.')
       })
     }
         
     module.exports = {
         newTransferExterna,
         newTransferInterna,
-        getTransferenciasUsuario,
+        getTransferenciasConta,
         getById
     }
