@@ -59,10 +59,9 @@ connect()
     } 
 
     const getContasUsuario = (request, response) => {
-      const usuario = request.userId;
-      const id = request.userId;
+      const usuario = request.params.usuario
       
-      return contasModel.findOne({usuario: usuario}, (error, conta) => {
+      return contasModel.find(usuario, (error, conta) => {
         if (error){
           return response.status(500).send(error)
       }
