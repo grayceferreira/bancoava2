@@ -3,7 +3,7 @@ const MONGO_URL = 'mongodb+srv://admin:admin@cluster0-3tdqy.mongodb.net/test?ret
 
 function connect () {
   mongoose.connect(MONGO_URL,
-    { useNewUrlParser: true , useUnifiedTopology: true },
+    { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false },
     function (error) {
       if(error) {
         console.error("Erro", error)

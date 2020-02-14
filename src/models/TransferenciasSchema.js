@@ -6,6 +6,7 @@ const TransferenciasSchema = new Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, auto: true, required: true },
     idBanco: {type: Number, required: false },
     tipoConta: { type: String, required: false },
+    nome: { type: String, required: false },
     agencia: { type: String, required: false },
     conta: { type: String, required: false },
     contaAva: { type: mongoose.Schema.Types.ObjectId, ref: 'contas' },

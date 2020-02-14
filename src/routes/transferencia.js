@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require("../controllers/TransferenciasController")
 
 router.post('/outrosBancos/:contaId', controller.newTransferExterna)
-router.post('/ava/:contaDestino/:contaId', controller.newTransferInterna) 
+router.post('/ava/', controller.newTransferInterna) 
+router.post('/', controller.getTransferenciasConta)
 
 module.exports = router
