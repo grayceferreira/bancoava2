@@ -8,7 +8,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "server": "nodemon app.js",
     "start": "node app.js",
     "start:dev": "nodemon start",
     "test": "echo \"Error: no test specified\" && exit 1"
