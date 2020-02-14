@@ -58,8 +58,41 @@ const newTransferExterna = (request, response, next) => {
           .catch(err => next(err));
         }
 
+        const getById = (request, response) => {
+          const id = request.params.id
+          
+          return transferenciasModel.find(id, (error, transferencia) => {
+              if (error){
+                  return response.status(500).send(error)
+              }
+  
+              if (transferencia) {
+                  return response.status(200).send(transferencia)
+              }
+  
+              return response.status(400).send('Transação não encontrada.')
+          })
+      } 
+        
+        const getTransferenciasConta = (request, response) => {
+          const contaOrigem = request.params.contaOrigem
+          
+          return transferenciasModel.find(contaOrigem, (error, transferencia) => {
+            if (error){
+              return response.status(500).send(error)
+          }
+    
+          if (transferencia) {
+              return response.status(200).send(transferencia)
+          }
+    
+          return response.status(400).send('Não há transferências realizadas por essa conta.')
+      })
+    }
         
     module.exports = {
         newTransferExterna,
-        newTransferInterna
+        newTransferInterna,
+        getTransferenciasConta,
+        getById
     }
