@@ -1,0 +1,65 @@
+[
+    {
+        tipo: 1,
+        agencia: 012,
+        conta: "456-12"
+        saldo: 7000,
+        usuario: 
+    },
+    {
+        tipo: 1,
+        agencia: 012,
+        conta: "678-12"
+        saldo: 6000,
+        usuario: 
+    },
+    {
+        tipo: 1,
+        agencia: 012,
+        conta: "777-13"
+        saldo: 200,
+        usuario: 
+    },
+    {
+        tipo: 2,
+        agencia: 013,
+        conta: "978-14"
+        saldo: 400,
+        usuario: 
+    },
+    {
+        tipo: 2,
+        agencia: 013,
+        conta: "978-14"
+        saldo: 400,
+        usuario: 
+    },
+    {
+        tipo: 1,
+        agencia: 002,
+        conta: "979-13"
+        saldo: 50000,
+        usuario: 
+    },
+    {
+        tipo: 1,
+        agencia: 006,
+        conta: "045-13"
+        saldo: 9000,
+        usuario: 
+    },
+    {
+        tipo: 2,
+        agencia: 004,
+        conta: "332-11"
+        saldo: 4500,
+        usuario: 
+    },
+    {
+        tipo: 2,
+        agencia: 007,
+        conta: "456-02"
+        saldo: 4500,
+        usuario: 
+    }
+]
